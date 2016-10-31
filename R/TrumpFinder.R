@@ -19,7 +19,7 @@ personality_insights <- function(textTweets){
 return(data)
 }
 
-plot_pi <- function(pidata){
+plot_pi <- function(pidata,user){
 	
 big5 <- data.frame()
 needs <- data.frame()
@@ -157,7 +157,7 @@ i <- i + 5
 
 par(las = 2, mfrow = c(3,3)) #print x labels perpendicular to the x-axis
 
-bp <- barplot(unlist(big5),cex.axis=0.5,cex.names=0.5,main = "Big 5 Personality", ylab = "Score in Percentage%", ylim = c(0,100),col='deepskyblue3')
+bp <- barplot(unlist(big5),cex.axis=0.5,cex.names=0.5,main = paste("Big 5 Personality for ",user), ylab = "Score in Percentage%", ylim = c(0,100),col='deepskyblue3')
 text(bp,0,round(unlist(big5),1), pos = 3)
 
 bp <- barplot(unlist(needs),cex.axis=0.5,cex.names=0.5,main = "Needs", ylab = "Score in Percentage%", ylim = c(0,100),col='seagreen3')
@@ -190,7 +190,7 @@ length(tweets)
 textTweets <- laply(tweets, function(t) t$getText())
 
 personality_data <- personality_insights(textTweets)
-plot_pi(as.data.frame(personality_data["tree"]))   
+plot_pi(as.data.frame(personality_data["tree"]), "Donald Trump")   
  
 #str_replace(textTweets,' \"', '') 
 
